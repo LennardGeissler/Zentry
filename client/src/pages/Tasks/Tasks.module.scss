@@ -1,0 +1,57 @@
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__create {
+    width: 100%;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.task-card {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    :global(.mantine-Text-root) {
+      flex: 1;
+      margin-top: 0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-shrink: 0;
+
+    :global(.mantine-ActionIcon-root) {
+      transition: all 0.2s ease;
+      box-shadow: var(--mantine-shadow-sm);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--mantine-shadow-md);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    :global(.mantine-Button-root) {
+      min-width: 100px;
+    }
+  }
+} 

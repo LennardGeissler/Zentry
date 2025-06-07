@@ -1,0 +1,256 @@
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.wrapper {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(250deg, rgba(13, 17, 23, 0.95) 30%, rgba(13, 17, 23, 0.85) 90%),
+        url('/login-bg.jpg');
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.backgroundShapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.shape {
+    position: absolute;
+    background: linear-gradient(45deg, var(--mantine-color-blue-6), var(--mantine-color-cyan-6));
+    filter: blur(50px);
+    opacity: 0.1;
+    border-radius: 50%;
+
+    &:nth-child(1) {
+        width: 500px;
+        height: 500px;
+        top: -250px;
+        right: -100px;
+        animation: float 8s ease-in-out infinite;
+    }
+
+    &:nth-child(2) {
+        width: 300px;
+        height: 300px;
+        bottom: -150px;
+        left: -50px;
+        animation: float 12s ease-in-out infinite reverse;
+    }
+
+    &:nth-child(3) {
+        width: 400px;
+        height: 400px;
+        top: 40%;
+        right: 25%;
+        animation: float 10s ease-in-out infinite;
+    }
+}
+
+.container {
+    padding: 40px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.logoWrapper {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(250deg, var(--mantine-color-blue-7), var(--mantine-color-cyan-7));
+    border-radius: 50%;
+    color: var(--mantine-color-white);
+    position: relative;
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+
+    svg {
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+}
+
+.logoGlow {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(250deg, var(--mantine-color-blue-5), var(--mantine-color-cyan-5));
+    border-radius: 50%;
+    filter: blur(15px);
+    opacity: 0.5;
+    z-index: 0;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.title {
+    color: var(--mantine-color-white);
+    font-family: 'Greycliff CF', var(--mantine-font-family);
+    font-weight: 900;
+    font-size: 2.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+}
+
+.form {
+    background: rgba(26, 27, 30, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--mantine-color-dark-4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        border-color: var(--mantine-color-dark-3);
+    }
+}
+
+.formHeader {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.sectionTitle {
+    color: var(--mantine-color-white);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.sectionSubtitle {
+    color: var(--mantine-color-gray-5);
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.inputWrapper {
+    transition: transform 0.2s ease;
+
+    &:focus-within {
+        transform: translateY(-2px);
+    }
+}
+
+.input {
+    background-color: var(--mantine-color-dark-6);
+    border-color: var(--mantine-color-dark-4);
+    color: var(--mantine-color-white);
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    height: 42px;
+
+    &:focus {
+        border-color: var(--mantine-color-blue-5);
+        background-color: var(--mantine-color-dark-5);
+    }
+
+    &::placeholder {
+        color: var(--mantine-color-dark-2);
+    }
+}
+
+.inputLabel {
+    color: var(--mantine-color-gray-5);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.submitButton {
+    height: 44px;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+
+    &:not(:disabled) {
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 149, 255, 0.2);
+        }
+
+        &:active {
+            transform: translateY(1px);
+        }
+    }
+}
+
+.link {
+    color: var(--mantine-color-blue-4);
+    transition: all 0.2s ease;
+    text-decoration: none;
+
+    &:hover {
+        color: var(--mantine-color-blue-3);
+        text-decoration: underline;
+    }
+}
+
+.terms {
+    color: var(--mantine-color-gray-6);
+    line-height: 1.4;
+}

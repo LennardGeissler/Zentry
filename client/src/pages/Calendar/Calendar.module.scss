@@ -1,0 +1,357 @@
+.calendar {
+  height: calc(100vh - 6rem);
+  background-color: var(--mantine-color-dark-7);
+
+  &__card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--mantine-color-dark-7);
+    border: 1px solid var(--mantine-color-dark-4);
+
+    :global(.mantine-Card-root) {
+      background-color: var(--mantine-color-dark-7);
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    flex: 1;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__viewSelect {
+    width: 120px;
+  }
+
+  &__navigation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__body {
+    flex: 1;
+    overflow: auto;
+    min-height: 0;
+    background-color: var(--mantine-color-dark-7);
+  }
+
+  &__grid {
+    min-height: 600px;
+    background-color: var(--mantine-color-dark-7);
+  }
+
+  &__weekday {
+    text-align: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--mantine-color-dark-4);
+    color: var(--mantine-color-gray-5);
+  }
+
+  &__day {
+    height: 100px;
+    border: 1px solid var(--mantine-color-dark-4);
+    transition: background-color 0.2s;
+    cursor: pointer;
+
+    &--dimmed {
+      opacity: 0.5;
+    }
+
+    &--today {
+      .calendar__dayNumber {
+        background-color: var(--mantine-color-blue-6);
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+  &__dayContent {
+    position: relative;
+    min-height: calc(24 * 60px); // 24 hours * 60px height per hour
+  }
+
+  &__dayNumber {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  &__events {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow: hidden;
+  }
+
+  &__event {
+    padding: 0.125rem 0.25rem;
+    border-radius: 4px;
+    color: white;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+
+    // Specific styles for week and day views
+    .calendar__weekView &,
+    .calendar__dayView & {
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      min-height: 24px;
+      z-index: 1;
+    }
+  }
+
+  &__eventIndicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--mantine-color-blue-6);
+    margin-top: 0.25rem;
+  }
+
+  &__weekView,
+  &__dayView {
+    height: 100%;
+    overflow: auto;
+    position: relative;
+  }
+
+  &__timeColumn {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: var(--mantine-color-dark-7);
+    border-right: 1px solid var(--mantine-color-dark-4);
+    width: 100%;
+  }
+
+  &__timeHeader {
+    height: 50px;
+    border-bottom: 1px solid var(--mantine-color-dark-4);
+    background-color: var(--mantine-color-dark-7);
+  }
+
+  &__timeSlot {
+    height: 60px;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid var(--mantine-color-dark-4);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    color: var(--mantine-color-gray-5);
+    position: relative;
+
+    .calendar__dayColumn & {
+      border-bottom-style: dashed;
+      border-bottom-width: 1px;
+      border-bottom-color: var(--mantine-color-dark-4);
+    }
+  }
+
+  &__dayColumn {
+    height: 100%;
+    border-right: 1px solid var(--mantine-color-dark-4);
+    position: relative;
+    background-color: var(--mantine-color-dark-7);
+  }
+
+  &__dayHeader {
+    height: 50px;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--mantine-color-dark-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--mantine-color-dark-7);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    .calendar__dayNumber {
+      &--today {
+        background-color: var(--mantine-color-blue-6);
+        color: white;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  :global {
+    .mantine-Card-root {
+      background-color: var(--mantine-color-dark-7);
+    }
+
+    .mantine-Modal-content {
+      background-color: var(--mantine-color-dark-7);
+      color: var(--mantine-color-white);
+
+      .mantine-Modal-header {
+        background-color: var(--mantine-color-dark-7);
+      }
+
+      .mantine-ColorInput-dropdown {
+        width: 100%;
+      }
+
+      .mantine-ColorInput-swatch {
+        width: 24px;
+        height: 24px;
+      }
+
+      .mantine-DatePickerInput-input,
+      .mantine-TimeInput-input {
+        background-color: var(--mantine-color-dark-6);
+        border-color: var(--mantine-color-dark-4);
+        color: var(--mantine-color-white);
+
+        &:focus {
+          border-color: var(--mantine-color-blue-6);
+        }
+
+        &::placeholder {
+          color: var(--mantine-color-dark-2);
+        }
+      }
+
+      .mantine-DatePickerInput-calendarHeader {
+        background-color: var(--mantine-color-dark-7);
+        border-bottom: 1px solid var(--mantine-color-dark-4);
+      }
+
+      .mantine-DatePickerInput-monthCell {
+        color: var(--mantine-color-white);
+      }
+
+      .mantine-DatePickerInput-monthCell[data-weekend] {
+        color: var(--mantine-color-blue-4);
+      }
+
+      .mantine-DatePickerInput-monthCell[data-outside] {
+        color: var(--mantine-color-dark-3);
+      }
+
+      .mantine-DatePickerInput-day {
+        color: var(--mantine-color-white);
+        border-radius: 4px;
+
+        &[data-selected] {
+          background-color: var(--mantine-color-blue-6);
+        }
+
+        &[data-today] {
+          color: var(--mantine-color-blue-4);
+          border: 1px solid var(--mantine-color-blue-4);
+        }
+
+        &:hover {
+          background-color: var(--mantine-color-dark-5);
+        }
+      }
+
+      .mantine-DatePickerInput-calendarHeaderControl {
+        color: var(--mantine-color-white);
+
+        &:hover {
+          background-color: var(--mantine-color-dark-5);
+        }
+      }
+
+      .mantine-DatePickerInput-calendarHeaderLevel {
+        color: var(--mantine-color-white);
+
+        &:hover {
+          background-color: var(--mantine-color-dark-5);
+        }
+      }
+
+      .mantine-DatePickerInput-yearsList,
+      .mantine-DatePickerInput-monthsList {
+        background-color: var(--mantine-color-dark-7);
+        
+        [role="option"] {
+          color: var(--mantine-color-white);
+
+          &[data-selected] {
+            background-color: var(--mantine-color-blue-6);
+          }
+
+          &:hover {
+            background-color: var(--mantine-color-dark-5);
+          }
+        }
+      }
+
+      .mantine-Divider-label {
+        font-size: var(--mantine-font-size-sm);
+        color: var(--mantine-color-gray-5);
+        background-color: var(--mantine-color-dark-7);
+      }
+
+      .mantine-Divider-root {
+        border-color: var(--mantine-color-dark-4);
+      }
+
+      .mantine-TextInput-input,
+      .mantine-Textarea-input {
+        background-color: var(--mantine-color-dark-6);
+        border-color: var(--mantine-color-dark-4);
+        color: var(--mantine-color-white);
+
+        &:focus {
+          border-color: var(--mantine-color-blue-6);
+        }
+
+        &::placeholder {
+          color: var(--mantine-color-dark-2);
+        }
+      }
+
+      .mantine-Checkbox-input {
+        background-color: var(--mantine-color-dark-6);
+        border-color: var(--mantine-color-dark-4);
+
+        &:checked {
+          background-color: var(--mantine-color-blue-6);
+          border-color: var(--mantine-color-blue-6);
+        }
+      }
+
+      label {
+        color: var(--mantine-color-gray-5);
+      }
+    }
+  }
+} 
