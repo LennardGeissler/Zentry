@@ -2,6 +2,8 @@
 
 A modern, full-stack application designed to help users track their tasks, habits, and goals with comprehensive progress monitoring and analytics.
 
+![Zentry Dashboard](./docs/images/zentry_dashboard.png)
+
 ## ✨ Core Features
 
 ### 📋 Task Management
