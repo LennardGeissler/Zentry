@@ -1,6 +1,17 @@
 import { Router, Request, Response } from 'express';
-import { Op } from 'sequelize';
+import { Op, WhereOptions, Model, CreationOptional, InferAttributes, InferCreationAttributes } from 'sequelize';
 import { Task, Habit, HabitLog } from '../models';
+
+interface TaskModel extends Model<InferAttributes<TaskModel>, InferCreationAttributes<TaskModel>> {
+  id: CreationOptional<number>;
+  text: string;
+  completed: boolean;
+  topic: string;
+  userId: number;
+  createdAt: CreationOptional<Date>;
+  updatedAt: CreationOptional<Date>;
+  dueDate?: Date;
+}
 
 const router = Router();
 
@@ -16,71 +27,95 @@ router.get('/', async (req: Request, res: Response) => {
 
     // Task statistics
     const totalTasks = await Task.count({
-      where: { userId },
+      where: { userId } as WhereOptions<TaskModel>,
     });
 
     const completedTasks = await Task.count({
       where: {
         userId,
         completed: true,
-      },
+      } as WhereOptions<TaskModel>,
     });
 
     const dailyTasks = await Task.count({
       where: {
         userId,
-        createdAt: {
-          [Op.gte]: startOfDay,
-        },
-      },
+        [Op.and]: [
+          {
+            createdAt: {
+              [Op.gte]: startOfDay,
+            },
+          },
+        ],
+      } as WhereOptions<TaskModel>,
     });
 
     const weeklyTasks = await Task.count({
       where: {
         userId,
-        createdAt: {
-          [Op.gte]: startOfWeek,
-        },
-      },
+        [Op.and]: [
+          {
+            createdAt: {
+              [Op.gte]: startOfWeek,
+            },
+          },
+        ],
+      } as WhereOptions<TaskModel>,
     });
 
     const monthlyTasks = await Task.count({
       where: {
         userId,
-        createdAt: {
-          [Op.gte]: startOfMonth,
-        },
-      },
+        [Op.and]: [
+          {
+            createdAt: {
+              [Op.gte]: startOfMonth,
+            },
+          },
+        ],
+      } as WhereOptions<TaskModel>,
     });
 
     const dailyCompletedTasks = await Task.count({
       where: {
         userId,
         completed: true,
-        createdAt: {
-          [Op.gte]: startOfDay,
-        },
-      },
+        [Op.and]: [
+          {
+            createdAt: {
+              [Op.gte]: startOfDay,
+            },
+          },
+        ],
+      } as WhereOptions<TaskModel>,
     });
 
     const weeklyCompletedTasks = await Task.count({
       where: {
         userId,
         completed: true,
-        createdAt: {
-          [Op.gte]: startOfWeek,
-        },
-      },
+        [Op.and]: [
+          {
+            createdAt: {
+              [Op.gte]: startOfWeek,
+            },
+          },
+        ],
+      } as WhereOptions<TaskModel>,
     });
 
     const monthlyCompletedTasks = await Task.count({
       where: {
         userId,
         completed: true,
-        createdAt: {
-          [Op.gte]: startOfMonth,
-        },
-      },
+        [Op.and]: [
+          {
+            createdAt: {
+              [Op.gte]: startOfMonth,
+            },
+          },
+        ],
+      } as WhereOptions<TaskModel>,
     });
 
     // Habit statistics
@@ -100,19 +135,23 @@ router.get('/', async (req: Request, res: Response) => {
 
     const habitStats = {
       total: habits.length,
-      active: habits.filter(h => h.logs && h.logs.length > 0).length,
+      active: habits.filter(h => (h as any).logs?.length > 0).length,
       averageStreak: habits.reduce((acc, h) => acc + h.currentStreak, 0) / habits.length || 0,
-      bestPerforming: habits.sort((a, b) => b.currentStreak - a.currentStreak)[0]?.title || '',
+      bestPerforming: habits.sort((a, b) => b.currentStreak - a.currentStreak)[0]?.name || '',
     };
 
     const overdueTasks = await Task.count({
       where: {
         userId,
         completed: false,
-        dueDate: {
-          [Op.lt]: new Date(),
-        },
-      },
+        [Op.and]: [
+          {
+            dueDate: {
+              [Op.lt]: new Date(),
+            },
+          },
+        ],
+      } as WhereOptions<TaskModel>,
     });
 
     const completionRate = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
@@ -129,17 +168,17 @@ router.get('/', async (req: Request, res: Response) => {
         daily: {
           total: dailyTasks,
           completed: dailyCompletedTasks,
-          rate: dailyTasks > 0 ? (dailyCompletedTasks / dailyTasks) * 100 : 0,
+          rate: Number(dailyTasks) > 0 ? (Number(dailyCompletedTasks) / Number(dailyTasks)) * 100 : 0,
         },
         weekly: {
           total: weeklyTasks,
           completed: weeklyCompletedTasks,
-          rate: weeklyTasks > 0 ? (weeklyCompletedTasks / weeklyTasks) * 100 : 0,
+          rate: Number(weeklyTasks) > 0 ? (Number(weeklyCompletedTasks) / Number(weeklyTasks)) * 100 : 0,
         },
         monthly: {
           total: monthlyTasks,
           completed: monthlyCompletedTasks,
-          rate: monthlyTasks > 0 ? (monthlyCompletedTasks / monthlyTasks) * 100 : 0,
+          rate: Number(monthlyTasks) > 0 ? (Number(monthlyCompletedTasks) / Number(monthlyTasks)) * 100 : 0,
         },
       },
     };

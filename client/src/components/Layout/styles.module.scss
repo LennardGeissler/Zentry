@@ -1,0 +1,50 @@
+.navLink {
+  padding: 12px 16px;
+  border-radius: var(--mantine-radius-md);
+  width: 100%;
+  transition: all 200ms ease;
+  
+  &:hover {
+    transform: translateX(4px);
+  }
+}
+
+.active {
+  background-color: light-dark(rgba(51, 154, 240, 0.65), rgba(51, 154, 240, 0.35));
+  color: light-dark(var(--mantine-color-blue-7), var(--mantine-color-white));
+
+  &:hover {
+    background-color: light-dark(rgba(51, 154, 240, 0.85), rgba(51, 154, 240, 0.45));
+  }
+}
+
+.inactive {
+  background-color: transparent;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-3));
+
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-0), rgba(44, 46, 51, 0.35));
+  }
+}
+
+.icon {
+  transition: color 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  transition: font-weight 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activeText {
+  font-weight: 600;
+}
+
+.inactiveText {
+  font-weight: 400;
+} 

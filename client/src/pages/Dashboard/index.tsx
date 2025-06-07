@@ -1,14 +1,14 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Select, Checkbox, Text, ActionIcon, Tooltip as MantineTooltip } from '@mantine/core';
+import { Select, Checkbox, Text, ActionIcon, Tooltip as MantineTooltip, Button } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { LineChart, Line, PieChart, Pie, Cell } from 'recharts';
-import { 
-  IconTrash, 
-  IconEdit, 
-  IconMoodSmile, 
-  IconBarbell, 
-  IconAlertTriangle, 
+import {
+  IconTrash,
+  IconEdit,
+  IconMoodSmile,
+  IconBarbell,
+  IconAlertTriangle,
   IconMoonStars,
   IconBook2,
   IconBrain,
@@ -23,7 +23,8 @@ import {
   IconApple,
   IconZzz,
   IconHeartbeat,
-  IconRun
+  IconRun,
+  IconPlus
 } from '@tabler/icons-react';
 import styles from './Dashboard.module.scss';
 import { taskService, dailyMoodService, habitService, yearlyGoalService } from '../../services/api';
@@ -68,7 +69,7 @@ const COLORS = {
 
 const getHabitIcon = (habitName: string) => {
   const normalizedName = habitName.toLowerCase();
-  
+
   if (normalizedName.includes('exercise') || normalizedName.includes('workout')) return IconBarbell;
   if (normalizedName.includes('read')) return IconBook2;
   if (normalizedName.includes('meditat')) return IconBrain;
@@ -84,7 +85,7 @@ const getHabitIcon = (habitName: string) => {
   if (normalizedName.includes('sleep')) return IconZzz;
   if (normalizedName.includes('health')) return IconHeartbeat;
   if (normalizedName.includes('run') || normalizedName.includes('walk')) return IconRun;
-  
+
   // Default icon if no match
   return IconBarbell;
 };
@@ -776,6 +777,14 @@ export default function Dashboard() {
               ]}
               placeholder="Select topic"
             />
+            <Button
+              onClick={addNewGoal}
+              variant="filled"
+              disabled={!newGoal.trim()}
+              p={0}
+            >
+              <IconPlus size={20} stroke={2.5} />
+            </Button> 
           </div>
         </div>
       </section>
@@ -865,6 +874,15 @@ export default function Dashboard() {
               ]}
               placeholder="Select topic"
             />
+            <Button
+              onClick={addNewTask}
+              variant="filled"
+              disabled={!newTask.trim()}
+              p={0}
+              size="sm"
+            >
+              <IconPlus size={20} stroke={2.5} />
+            </Button>
           </div>
         </div>
       </section>

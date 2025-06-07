@@ -6,6 +6,7 @@ import { IconLayoutDashboard, IconChecklist, IconHeartRateMonitor, IconChartBar,
 import { useAuth } from '../../contexts/AuthContext';
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import { LanguageSwitcher } from '../LanguageSwitcher';
+import classes from './styles.module.scss';
 
 interface LayoutProps {
   children: ReactNode;
@@ -31,7 +32,9 @@ function NavLink({ to, label, icon, onClick }: NavLinkProps) {
     borderRadius: theme.radius.md,
     width: '100%',
     backgroundColor: isActive 
-      ? `rgba(${theme.colors[theme.primaryColor][isDark ? 9 : 6]}, ${isDark ? 0.35 : 0.15})`
+      ? isDark 
+        ? `rgba(${theme.colors.blue[9]}, 0.35)`
+        : `rgba(${theme.colors.blue[1]}, 0.65)`
       : 'transparent',
     color: isActive 
       ? isDark ? theme.white : theme.colors[theme.primaryColor][7]
@@ -39,7 +42,9 @@ function NavLink({ to, label, icon, onClick }: NavLinkProps) {
     transition: 'all 200ms ease',
     '&:hover': {
       backgroundColor: isActive 
-        ? `rgba(${theme.colors[theme.primaryColor][isDark ? 9 : 6]}, ${isDark ? 0.45 : 0.25})`
+        ? isDark 
+          ? `rgba(${theme.colors.blue[9]}, 0.45)`
+          : `rgba(${theme.colors.blue[1]}, 0.85)`
         : isDark 
           ? `rgba(${theme.colors.dark[5]}, 0.35)`
           : theme.colors.gray[0],
@@ -63,11 +68,13 @@ function NavLink({ to, label, icon, onClick }: NavLinkProps) {
     return (
       <UnstyledButton
         onClick={onClick}
-        style={commonStyles}
+        className={`${classes.navLink} ${isActive ? classes.active : classes.inactive}`}
       >
         <Group>
-          <Box style={iconStyle}>{icon}</Box>
-          <Text style={textStyle}>{label}</Text>
+          <Box className={classes.icon}>{icon}</Box>
+          <Text className={`${classes.text} ${isActive ? classes.activeText : classes.inactiveText}`}>
+            {label}
+          </Text>
         </Group>
       </UnstyledButton>
     );
@@ -77,11 +84,13 @@ function NavLink({ to, label, icon, onClick }: NavLinkProps) {
     <UnstyledButton
       component={Link}
       to={to}
-      style={commonStyles}
+      className={`${classes.navLink} ${isActive ? classes.active : classes.inactive}`}
     >
       <Group>
-        <Box style={iconStyle}>{icon}</Box>
-        <Text style={textStyle}>{label}</Text>
+        <Box className={classes.icon}>{icon}</Box>
+        <Text className={`${classes.text} ${isActive ? classes.activeText : classes.inactiveText}`}>
+          {label}
+        </Text>
       </Group>
     </UnstyledButton>
   );

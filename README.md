@@ -1,103 +1,189 @@
-# Zentry - Task and Habit Tracking Application
+# 📝 Zentry - Personal Productivity & Goal Tracking Platform
 
-A full-stack application for tracking personal tasks and habits with advanced statistics and progress monitoring.
+A modern, full-stack application designed to help users track their tasks, habits, and goals with comprehensive progress monitoring and analytics.
 
-## Features
+## ✨ Core Features
 
-- Task management with priorities and due dates
-- Habit tracking with streaks and completion logs
-- Comprehensive statistics for tasks and habits
+### 📋 Task Management
+- Daily task tracking with topic categorization
+- Task prioritization system
+- Completion status tracking
+- Task editing and deletion
+- Topic-based organization (University, Job, Fitness, Appointments, etc.)
+
+### 🎯 Yearly Goals
+- Long-term goal setting and tracking
+- Goal categorization (Career, Education, Health, Personal, Finance)
+- Progress monitoring
+- Goal completion tracking
+- Easy goal management interface
+
+### ⚡ Habit Tracking
+- Daily habit monitoring
+- Streak tracking system
+- Habit completion logging
+- Customizable habit categories
+- Progress visualization
+
+### 📊 Analytics & Statistics
+- Comprehensive task completion statistics
 - Daily, weekly, and monthly progress views
-- Modern, responsive UI built with React and Mantine
+- Visual progress charts and graphs
+- Completion rate analytics
+- Habit streak monitoring
 
-## Tech Stack
+### 🌟 Daily Mood Tracking
+- Track daily emotional states
+- Monitor productivity levels
+- Track stress and energy levels
+- Historical mood data analysis
 
-### Frontend
-- Vite
-- React
-- TypeScript
-- SWC
-- Mantine UI
-- Recharts for data visualization
+### 💫 User Interface
+- Modern, responsive design
+- Dark/Light theme support
+- Intuitive navigation
+- Mobile-friendly layout
+- Real-time updates
 
-### Backend
-- Express
-- TypeScript
-- Microsoft SQL Server
+## 🛠️ Technical Stack
 
-## Prerequisites
+### 🎨 Frontend
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **UI Library**: Mantine UI
+- **Charts**: Recharts
+- **Icons**: Tabler Icons
+- **State Management**: React Context
+- **Routing**: React Router
+- **HTTP Client**: Axios
+- **Development Tools**:
+  - ESLint for code quality
+  - TypeScript for type safety
+  - SWC for fast compilation
 
+### ⚙️ Backend
+- **Runtime**: Node.js
+- **Framework**: Express.js with TypeScript
+- **Database**: Microsoft SQL Server
+- **ORM**: Sequelize
+- **Authentication**: JWT
+- **API**: RESTful architecture
+
+## 🚀 Setup Instructions
+
+### 📋 Prerequisites
 - Node.js (v18 or later)
 - Microsoft SQL Server
-- npm or yarn
+- npm or yarn package manager
+- Git
 
-## Setup Instructions
-
-### Database Setup
-
+### 💾 Database Setup
 1. Install Microsoft SQL Server
 2. Create a new database named 'zentry'
-3. Update the DATABASE_URL in server/.env with your SQL Server credentials
+3. Configure the database connection:
+   ```bash
+   # In server/.env
+   DATABASE_URL="sqlserver://localhost:1433;database=zentry;user=sa;password=YourPassword;trustServerCertificate=true"
+   ```
 
-### Backend Setup
+### 🔧 Backend Setup
+1. Navigate to the server directory:
+   ```bash
+   cd server
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   ```bash
+   # Create .env file with:
+   DATABASE_URL="your-database-url"
+   PORT=3000
+   NODE_ENV=development
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-cd server
-npm install
-npm run dev
-```
+### 🎨 Frontend Setup
+1. Navigate to the client directory:
+   ```bash
+   cd client
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-### Frontend Setup
+## 🔌 API Documentation
 
-```bash
-cd client
-npm install
-npm run dev
-```
+### 📋 Tasks Endpoints
+- `GET /api/tasks/daily` - Get daily tasks
+- `POST /api/tasks` - Create a new task
+- `PUT /api/tasks/:id` - Update a task
+- `DELETE /api/tasks/:id` - Delete a task
 
-## Environment Variables
+### 🎯 Goals Endpoints
+- `GET /api/yearly-goals` - Get yearly goals
+- `POST /api/yearly-goals` - Create a new goal
+- `PUT /api/yearly-goals/:id` - Update a goal
+- `DELETE /api/yearly-goals/:id` - Delete a goal
 
-### Server (.env)
-```
-DATABASE_URL="sqlserver://localhost:1433;database=zentry;user=sa;password=YourStrong@Passw0rd;trustServerCertificate=true"
-PORT=3000
-NODE_ENV=development
-```
+### ⚡ Habits Endpoints
+- `GET /api/habits` - Get all habits
+- `POST /api/habits` - Create a new habit
+- `PUT /api/habits/:id` - Update a habit
+- `DELETE /api/habits/:id` - Delete a habit
+- `POST /api/habits/:id/log` - Log habit completion
 
-## API Endpoints
+### 📊 Statistics Endpoints
+- `GET /api/stats` - Get user statistics
+- `GET /api/stats/daily` - Get daily statistics
+- `GET /api/stats/weekly` - Get weekly statistics
+- `GET /api/stats/monthly` - Get monthly statistics
 
-### Tasks
-- GET /api/tasks - Get all tasks
-- POST /api/tasks - Create a new task
-- PUT /api/tasks/:id - Update a task
-- DELETE /api/tasks/:id - Delete a task
-- PATCH /api/tasks/:id/toggle - Toggle task completion
+### 🌟 Mood Tracking Endpoints
+- `GET /api/mood/daily` - Get daily mood
+- `POST /api/mood` - Save mood data
 
-### Habits
-- GET /api/habits - Get all habits
-- POST /api/habits - Create a new habit
-- PUT /api/habits/:id - Update a habit
-- DELETE /api/habits/:id - Delete a habit
-- POST /api/habits/:id/log - Log habit completion
+## 👨‍💻 Development Guidelines
 
-### Statistics
-- GET /api/stats - Get user statistics
+### 📝 Code Style
+- Use TypeScript for all new code
+- Follow ESLint configuration
+- Use Prettier for code formatting
+- Follow component-based architecture
+- Implement proper error handling
 
-## Development
+### 🌿 Git Workflow
+1. Create feature branches from main
+2. Use meaningful commit messages
+3. Submit pull requests for review
+4. Maintain clean commit history
 
-The application uses the following development tools:
-- ESLint for code linting
-- TypeScript for type safety
-- Vite for frontend development
+### ✅ Testing
+- Write unit tests for critical functionality
+- Perform manual testing before commits
+- Test across different browsers
+- Ensure mobile responsiveness
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## License
+## 📄 License
 
-MIT 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👫 Authors
+- Lennard Geißler
